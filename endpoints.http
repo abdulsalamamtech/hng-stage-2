@@ -1,0 +1,34 @@
+### Endpoints
+
+### POST /countries/refresh → Fetch all countries and exchange rates, then cache them in the database
+
+POST http://localhost:8000/api/countries/refresh
+Content-Type: application/json
+
+{}
+
+### GET /countries → Get all countries from the DB (support filters and sorting) - ?region=Africa | ?currency=NGN | ?sort=gdp_desc
+
+GET http://localhost:8000/api/countries?region=Africa&sort=gdp_desc
+Content-Type: application/json
+
+{}
+
+### GET /countries/:name → Get one country by name
+GET http://localhost:8000/api/countries/China
+
+Content-Type: application/json[endpoints](./endpoints.http)
+
+{}
+
+### DELETE /countries/:name → Delete a country record
+
+DELETE http://localhost:8000/api/countries/Niger
+
+### GET /status → Show total countries and last refresh timestamp
+
+GET http://localhost:8000/api/status
+
+### GET /countries/image → serve summary image
+
+GET http://localhost:8000/api/countries/image

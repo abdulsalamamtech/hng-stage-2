@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('countries', function (Blueprint $table) {
+            //  id — auto-generated
+            // name — required
+            // capital — optional
+            // region — optional
+            // population — required
+            // currency_code — required
+            // exchange_rate — required
+            // estimated_gdp — computed from population × random(1000–2000) ÷ exchange_rate
+            // flag_url — optional
+            // last_refreshed_at — auto timestamp
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('capital')->nullable();
+            $table->string('region')->nullable();
+            $table->unsignedBigInteger('population');
+            $table->string('currency_code', 3)->nullable();
+            $table->decimal('exchange_rate', 15, 6)->nullable();
+            $table->decimal('estimated_gdp', 20, 2)->nullable();
+            $table->string('flag_url')->nullable();
+            $table->timestamp('last_refreshed_at')->useCurrent();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('countries');
+    }
+};
